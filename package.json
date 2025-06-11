@@ -1,0 +1,43 @@
+{
+  "name": "aviator-game",
+  "version": "1.0.0",
+  "description": "لعبة الطيارة - لعبة مراهنة تفاعلية مع نظام شحن USDT وأداة إدارة سرية",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server .",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "echo 'Ready for deployment to Vercel or GitHub Pages'"
+  },
+  "keywords": [
+    "aviator",
+    "game",
+    "gambling",
+    "usdt",
+    "trc20",
+    "arabic",
+    "web-game",
+    "javascript",
+    "html5",
+    "css3"
+  ],
+  "author": "qodo AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/aviator-game.git"
+  },
+  "homepage": "https://yourusername.github.io/aviator-game/",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الطيارة - Aviator Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شاشة تسجيل الدخول -->
+    <div id="loginScreen" class="screen active">
+        <div class="container">
+            <div class="login-box">
+                <h1>🛩️ لعبة الطيارة</h1>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('login')">تسجيل الدخول</button>
+                    <button class="tab-btn" onclick="showTab('register')">إنشاء حساب</button>
+                </div>
+                
+                <!-- تسجيل الدخول -->
+                <div id="loginTab" class="tab-content active">
+                    <form id="loginForm">
+                        <input type="text" id="loginUsername" placeholder="اسم المستخدم" required>
+                        <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                        <button type="submit">دخول</button>
+                    </form>
+                </div>
+                
+                <!-- إنشاء حساب -->
+                <div id="registerTab" class="tab-content">
+                    <form id="registerForm">
+                        <input type="text" id="regUsername" placeholder="اسم المستخدم" required>
+                        <input type="password" id="regPassword" placeholder="كلمة المرور" required>
+                        <input type="password" id="regConfirmPassword" placeholder="تأكيد كلمة المرور" required>
+                        <button type="submit">إنشاء حساب</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الشاشة الرئيسية للعبة -->
+    <div id="gameScreen" class="screen">
+        <div class="header">
+            <div class="user-info">
+                <span id="username">مرحباً، </span>
+                <span class="balance">الرصيد: <span id="balance">0</span> USDT</span>
+                <button id="depositBtn" class="deposit-btn">��حن رصيد</button>
+                <button id="logoutBtn" class="logout-btn">خروج</button>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <!-- منطقة اللعبة -->
+            <div class="game-area">
+                <!-- منحنى الطيران -->
+                <div class="flight-chart">
+                    <canvas id="flightCanvas" width="800" height="400"></canvas>
+                    <div id="plane" class="plane">🛩️</div>
+                    <div id="multiplier" class="multiplier">1.00x</div>
+                </div>
+                <div id="gameStatus" class="game-status">اضغط على "ابدأ" لبدء اللعبة</div>
+            </div>
+
+            <!-- لوحة التحكم -->
+            <div class="control-panel">
+                <div class="bet-section">
+                    <label>مبلغ الرهان:</label>
+                    <div class="bet-controls">
+                        <button onclick="adjustBet(-10)">-10</button>
+                        <input type="number" id="betAmount" value="10" min="1" max="1000">
+                        <button onclick="adjustBet(10)">+10</button>
+                    </div>
+                    <div class="quick-bets">
+                        <button onclick="setBet(30)">30</button>
+                        <button onclick="setBet(70)">70</button>
+                        <button onclick="setBet(200)">200</button>
+                        <button onclick="setBet(500)">500</button>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="startBtn" class="start-btn">ابدأ اللعبة</button>
+                    <button id="cashoutBtn" class="cashout-btn" disabled>البراشوت 🪂</button>
+                    <button id="autoBetBtn" class="auto-bet-btn">رهان تلقائي</button>
+                </div>
+
+                <div class="game-info">
+                    <div>الرهان الحالي: <span id="currentBet">0</span> USDT</div>
+                    <div>المكسب المحتمل: <span id="potentialWin">0</span> USDT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- جدول النتائج -->
+        <div class="results-table">
+            <h3>نتائج اللاعبين</h3>
+            <table id="playersTable">
+                <thead>
+                    <tr>
+                        <th>اسم المستخدم</th>
+                        <th>الرهان</th>
+                        <th>المضاعف</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody id="playersTableBody">
+                    <!-- سيتم ملؤها ديناميكياً -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- تاريخ الألعاب -->
+        <div class="history-section">
+            <h3>آخر النتائج</h3>
+            <div id="gameHistory" class="history-list"></div>
+        </div>
+    </div>
+
+    <!-- نافذة شحن الرصيد -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>شحن رصيد</h2>
+            <div class="deposit-info">
+                <p>لشحن رصيدك، قم بإرسال USDT (TRC-20) إلى العنوان التالي:</p>
+                <div class="wallet-address">
+                    <input type="text" value="TBHVuc4AVbmvjpuWyX17CAxFbuQn49N8bt" readonly>
+                    <button onclick="copyAddress()">نسخ</button>
+                </div>
+                <p>بعد الإرسال، تواصل معنا على تليجرام للتأكيد:</p>
+                <a href="https://t.me/PrinceOfDeals" target="_blank" class="telegram-btn">
+                    📱 @PrinceOfDeals
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
